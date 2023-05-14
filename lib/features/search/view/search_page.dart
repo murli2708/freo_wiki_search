@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freo_wiki_search/core/widgets/jumping_dots.dart';
 import 'package:freo_wiki_search/features/search/provider/search_provider.dart';
 import 'package:freo_wiki_search/features/search/provider/search_state.dart';
 
@@ -7,7 +8,7 @@ import '../utils/custom_card.dart';
 
 class SearchPage extends ConsumerWidget {
   SearchPage({super.key});
-  TextEditingController _searchController = TextEditingController(text: "freo");
+  final _searchController = TextEditingController(text: "freo");
   @override
   Widget build(BuildContext context, ref) {
     final searchData = ref.watch(searchDataProvider);
@@ -95,22 +96,7 @@ class SearchPage extends ConsumerWidget {
             ),
           ),
           SliverList(
-              delegate: SliverChildListDelegate(getWidgetList(searchData)
-                  //       [
-
-                  //   CustomCard(),
-
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  //   CustomCard(),
-                  // ]
-                  ))
+              delegate: SliverChildListDelegate(getWidgetList(searchData)))
         ],
       ),
     );
@@ -119,8 +105,9 @@ class SearchPage extends ConsumerWidget {
   List<Widget> getWidgetList(SearchState searchData) {
     if (searchData is LoadingState) {
       return [
-        const Center(
-          child: CircularProgressIndicator(),
+        const SizedBox(
+          height: 500,
+          child: JumpingDots(),
         )
       ];
     } else if (searchData is LoadedState) {
@@ -144,14 +131,15 @@ class SearchPage extends ConsumerWidget {
       ];
     } else {
       return [
-        const Center(
+        const SizedBox(
+            height: 500,
             child: Text(
-          'Please search..',
-          style: TextStyle(
-              color: Color.fromARGB(255, 70, 62, 92),
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
-        ))
+              'Please search..',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 70, 62, 92),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
+            ))
       ];
     }
   }

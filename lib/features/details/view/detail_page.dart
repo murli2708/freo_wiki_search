@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freo_wiki_search/core/widgets/jumping_dots.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewClass extends StatefulWidget {
@@ -41,7 +42,7 @@ class _WebViewClassState extends State<WebViewClass> {
           ),
           isLoading
               ? const Center(
-                  child: CircularProgressIndicator(),
+                  child: JumpingDots(),
                 )
               : Stack(),
         ],

@@ -33,6 +33,3 @@ final searchDataProvider =
 final searchTextProvider = StateProvider<String>((ref) {
   return 'freo';
 });
-final pageIdProvider = StateProvider<String>((ref) {
-  return '';
-});

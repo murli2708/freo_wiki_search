@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freo_wiki_search/core/custom_endpoint.dart';
 import 'package:freo_wiki_search/features/search/data/models/search_model.dart';
 
 import '../../details/view/detail_page.dart';
@@ -19,8 +20,10 @@ class CustomCard extends StatelessWidget {
             context,
             PageRouteBuilder(
               pageBuilder: (c, a1, a2) => WebViewClass(
-                  title: data!.title ?? "Deatils",
-                  url: 'https://en.m.wikipedia.org/?curid=${data!.pageid}'),
+                title: data!.title ?? "Deatils",
+                url: Endpoint.getDetaildEndpoint(
+                    pageId: data!.pageid.toString()),
+              ),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 const begin = Offset(1.0, 0.0);
@@ -77,7 +80,7 @@ class CustomCard extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitHeight,
                           image: NetworkImage(data?.thumbnail?.source ??
                               'https://upload.wikimedia.org/wikipedia/commons/6/61/Wikipedia-logo-transparent.png'))),
                 ),
